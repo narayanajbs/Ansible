@@ -1,4 +1,4 @@
-- name: configuring roboshop " {{ component }} "
+- name: "configuring roboshop  {{ component }} "
   hosts: "{{ component }}"
   become: yes
   vars_files:
