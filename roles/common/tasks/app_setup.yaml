@@ -1,4 +1,4 @@
-- name: " install packages {{ component }} "
+- name: "install packages {{ component }}"
   ansible.builtin..packages:
     name: nginx
     state: present
