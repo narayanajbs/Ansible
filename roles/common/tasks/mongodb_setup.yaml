@@ -1,0 +1,6 @@
+- name: "install {{component}}"
+  ansible.builtin.package:
+    name: mongodb-org
+    state: present
+
+
