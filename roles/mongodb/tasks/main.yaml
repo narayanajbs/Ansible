@@ -12,7 +12,7 @@
     name: mongod
     state: started
     daemon_reload: yes
-    enable: true
+    enabled: true
 - name: Update listen address
   ansible.builtin.replace:
     path: /etc/mongod.conf
