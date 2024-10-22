@@ -3,7 +3,7 @@
     path: /app
     state: absent
 - name: create directory
-  ansible.builtin.path:
+  ansible.builtin.file:
     path: /app
     state: directory
 - name: downloading dependencies
