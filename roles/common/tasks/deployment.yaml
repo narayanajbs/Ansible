@@ -8,7 +8,7 @@
     state: directory
 - name: downloading dependencies
   ansible.builtin.get_url:
-    src: "https://roboshop-builds.s3.amazonaws.com/{{ component }}.zip"
+    url: "https://roboshop-builds.s3.amazonaws.com/{{ component }}.zip "
     dest: /tmp
 - name: extracting the dependencies
   ansible.builtin.unarchive:
