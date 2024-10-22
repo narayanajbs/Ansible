@@ -11,6 +11,7 @@
   ansible.builtin.service:
     name: mongod
     state: started
+    daemon_reload: yes
     enable: true
 - name: Update listen address
   ansible.builtin.replace:
