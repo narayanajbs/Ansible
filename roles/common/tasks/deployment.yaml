@@ -1,0 +1,17 @@
+- name: recursively remove directory
+  ansible.builtin.file:
+    path: /app
+    state: absent
+- name: create directory
+  ansible.builtin.path:
+    path: /app
+    state: directory
+- name: downloading dependencies
+  ansible.builtin.get_url:
+    src: "https://roboshop-builds.s3.amazonaws.com/{{ component }}.zip"
+    dest: /tmp
+- name: extracting the dependencies
+  ansible.builtin.unarchive:
+    src: "/tmp/{{ component }}.zip"
+    dest: /app
+    remote_src: yes

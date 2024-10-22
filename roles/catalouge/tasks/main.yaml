@@ -1,0 +1,39 @@
+- name: "install {{ component  }}"
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: nodejs_setup
+- name: create dependencies
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: deployment
+- name: switch to folder
+  ansible.builtin.shell: cd /app
+- name: download dependencies
+  ansible.builtin.package:
+    name: npm
+    state: present
+- name: setup systemd
+  ansible.builtin.template:
+    src: catalogue.service.j2
+    dest: /etc/systemd/system/catalogue.service
+- name: start system
+  ansible.buildin.service:
+    name: catalogue
+    state: started
+    enable: yes
+- name: install mangodb client
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: mongodb_client
+- name: "get the catalogue entries count"
+  ansible.builtin.shell:  mongo --host {{MONGODB_HOST}} --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+  register: products_count
+  when: component == "catalogue"
+- name: "load user data"
+  ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
+  when: component == "user" and users_count.stdout == "0"  # keep double quotes
+  #ignore_errors: true
+- name: restart system
+  ansible.buildin.service:
+    name: catalogue
+    state: restarted
