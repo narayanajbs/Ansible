@@ -10,7 +10,7 @@
   ansible.builtin.get_url:
     url: "https://roboshop-builds.s3.amazonaws.com/{{component}}.zip"
     dest: /tmp
-    username: root
+    mode: '0644'
    
 - name: extracting the dependencies
   ansible.builtin.unarchive:
