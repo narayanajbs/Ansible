@@ -10,9 +10,6 @@
   ansible.builtin.get_url:
     url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
     dest: /tmp
-    user: root
-    mode: '7777'
-   
 - name: extracting the dependencies
   ansible.builtin.unarchive:
     src: /tmp/catalogue.zip
