@@ -1,5 +1,5 @@
 - name: create mongodb repo setup
-  ansible.buildin.file:
+  ansible.builtin.file:
   src: mongo.repo
   dest: /etc/yum.repos.d/mongodb-org-8.0.repo
 - name: install mongodb client
